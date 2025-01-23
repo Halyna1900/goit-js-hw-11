@@ -13,9 +13,11 @@ const loader = document.querySelector('.loader');
 let lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
+  captions: true,
 });
 
 fetchImageForm.addEventListener('submit', event => {
+  const loader = document.querySelector('.loader');
   event.preventDefault();
   const query = formInput.value.trim();
 
@@ -34,7 +36,7 @@ fetchImageForm.addEventListener('submit', event => {
     .then(data => {
       loader.classList.remove('active');
 
-      if (data.hits.length === 0) {
+      if (data.total === 0) {
         iziToast.info({
           message:
             'Sorry, there are no images matching your search query. Please try again!',
